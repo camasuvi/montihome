@@ -13,18 +13,25 @@ export default async function EditGuidePage({ params }: { params: { id: string }
 
   async function update(formData: FormData) {
     'use server';
-    const slug = String(formData.get('slug') || guide.slug).trim();
-    const category = String(formData.get('category') || guide.category).trim();
+    const current = await prisma.guide.findUnique({
+      where: { id },
+      include: { translations: true }
+    });
+    if (!current) notFound();
+    const slug = String(formData.get('slug') || current.slug).trim();
+    const category = String(formData.get('category') || current.category).trim();
     const published = formData.get('published') === 'on';
-    const enTitle = String(formData.get('en_title') || en?.title || '');
-    const enSummary = String(formData.get('en_summary') || en?.summary || '');
-    const enContent = String(formData.get('en_content') || en?.content || '');
-    const trTitle = String(formData.get('tr_title') || tr?.title || '');
-    const trSummary = String(formData.get('tr_summary') || tr?.summary || '');
-    const trContent = String(formData.get('tr_content') || tr?.content || '');
+    const currentEn = current.translations.find((t) => t.languageCode === 'en');
+    const currentTr = current.translations.find((t) => t.languageCode === 'tr');
+    const enTitle = String(formData.get('en_title') || currentEn?.title || '');
+    const enSummary = String(formData.get('en_summary') || currentEn?.summary || '');
+    const enContent = String(formData.get('en_content') || currentEn?.content || '');
+    const trTitle = String(formData.get('tr_title') || currentTr?.title || '');
+    const trSummary = String(formData.get('tr_summary') || currentTr?.summary || '');
+    const trContent = String(formData.get('tr_content') || currentTr?.content || '');
 
     await prisma.guide.update({
-      where: { id: guide.id },
+      where: { id },
       data: {
         slug,
         category,
@@ -32,12 +39,12 @@ export default async function EditGuidePage({ params }: { params: { id: string }
         translations: {
           upsert: [
             {
-              where: { guideId_languageCode: { guideId: guide.id, languageCode: 'en' } },
+              where: { guideId_languageCode: { guideId: id, languageCode: 'en' } },
               update: { title: enTitle, summary: enSummary, content: enContent },
               create: { languageCode: 'en', title: enTitle, summary: enSummary, content: enContent }
             },
             {
-              where: { guideId_languageCode: { guideId: guide.id, languageCode: 'tr' } },
+              where: { guideId_languageCode: { guideId: id, languageCode: 'tr' } },
               update: { title: trTitle, summary: trSummary, content: trContent },
               create: { languageCode: 'tr', title: trTitle, summary: trSummary, content: trContent }
             }
@@ -50,7 +57,7 @@ export default async function EditGuidePage({ params }: { params: { id: string }
 
   async function remove() {
     'use server';
-    await prisma.guide.delete({ where: { id: guide.id } });
+    await prisma.guide.delete({ where: { id } });
     redirect('/admin/guides');
   }
 

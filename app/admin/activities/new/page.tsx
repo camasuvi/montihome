@@ -1,16 +1,27 @@
 import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
+import { AgeRange, Difficulty, MaterialsLevel } from '@prisma/client';
 
 export default function NewActivityPage() {
   async function create(formData: FormData) {
     'use server';
-    const ageRange = String(formData.get('ageRange') || 'AGE_3_4Y');
+    const ageRangeInput = String(formData.get('ageRange') || 'AGE_3_4Y');
     const durationMinutes = Number(formData.get('durationMinutes') || 10);
-    const difficulty = String(formData.get('difficulty') || 'EASY');
+    const difficultyInput = String(formData.get('difficulty') || 'EASY');
     const primaryCategory = String(formData.get('primaryCategory') || 'Practical Life');
     const categories = String(formData.get('categories') || '').split(',').map((s) => s.trim()).filter(Boolean);
     const tags = String(formData.get('tags') || '').split(',').map((s) => s.trim()).filter(Boolean);
-    const materialsLevel = String(formData.get('materialsLevel') || 'HOUSEHOLD');
+    const materialsLevelInput = String(formData.get('materialsLevel') || 'HOUSEHOLD');
+
+    const ageRange: AgeRange = (Object.values(AgeRange) as string[]).includes(ageRangeInput)
+      ? (ageRangeInput as AgeRange)
+      : AgeRange.AGE_3_4Y;
+    const difficulty: Difficulty = (Object.values(Difficulty) as string[]).includes(difficultyInput)
+      ? (difficultyInput as Difficulty)
+      : Difficulty.EASY;
+    const materialsLevel: MaterialsLevel = (Object.values(MaterialsLevel) as string[]).includes(materialsLevelInput)
+      ? (materialsLevelInput as MaterialsLevel)
+      : MaterialsLevel.HOUSEHOLD;
 
     const enTitle = String(formData.get('en_title') || '');
     const enShort = String(formData.get('en_short') || '');

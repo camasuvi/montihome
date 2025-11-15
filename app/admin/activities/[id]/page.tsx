@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma';
+import { AgeRange, Difficulty, MaterialsLevel } from '@prisma/client';
 import { redirect, notFound } from 'next/navigation';
 
 export default async function EditActivityPage({ params }: { params: { id: string } }) {
@@ -14,13 +15,28 @@ export default async function EditActivityPage({ params }: { params: { id: strin
 
   async function update(formData: FormData) {
     'use server';
-    const ageRange = String(formData.get('ageRange') || activity.ageRange);
-    const durationMinutes = Number(formData.get('durationMinutes') || activity.durationMinutes);
-    const difficulty = String(formData.get('difficulty') || activity.difficulty);
-    const primaryCategory = String(formData.get('primaryCategory') || activity.primaryCategory);
-    const categories = String(formData.get('categories') || activity.categories.join(',')).split(',').map((s) => s.trim()).filter(Boolean);
-    const tags = String(formData.get('tags') || activity.tags.join(',')).split(',').map((s) => s.trim()).filter(Boolean);
-    const materialsLevel = String(formData.get('materialsLevel') || activity.materialsLevel || 'HOUSEHOLD');
+    const current = await prisma.activity.findUnique({ where: { id } });
+    if (!current) notFound();
+    const ageRangeInput = String(formData.get('ageRange') || '');
+    const ageRange: AgeRange = (ageRangeInput &&
+      (Object.values(AgeRange) as string[]).includes(ageRangeInput)
+      ? (ageRangeInput as AgeRange)
+      : current.ageRange) as AgeRange;
+    const durationMinutes = Number(formData.get('durationMinutes') || current.durationMinutes);
+    const difficultyInput = String(formData.get('difficulty') || '');
+    const difficulty: Difficulty = (difficultyInput &&
+      (Object.values(Difficulty) as string[]).includes(difficultyInput)
+      ? (difficultyInput as Difficulty)
+      : current.difficulty) as Difficulty;
+    const primaryCategory = String(formData.get('primaryCategory') || current.primaryCategory);
+    const categories = String(formData.get('categories') || current.categories.join(',')).split(',').map((s) => s.trim()).filter(Boolean);
+    const tags = String(formData.get('tags') || current.tags.join(',')).split(',').map((s) => s.trim()).filter(Boolean);
+    const materialsLevelInput = String(formData.get('materialsLevel') || '');
+    const materialsLevel: MaterialsLevel =
+      (materialsLevelInput &&
+      (Object.values(MaterialsLevel) as string[]).includes(materialsLevelInput)
+        ? (materialsLevelInput as MaterialsLevel)
+        : (current.materialsLevel ?? MaterialsLevel.HOUSEHOLD));
 
     const enTitle = String(formData.get('en_title') || en?.title || '');
     const enShort = String(formData.get('en_short') || en?.shortDescription || '');
@@ -43,7 +59,7 @@ export default async function EditActivityPage({ params }: { params: { id: strin
     const trSafety = String(formData.get('tr_safety') || tr?.safetyNotes || '');
 
     await prisma.activity.update({
-      where: { id: activity.id },
+      where: { id },
       data: {
         ageRange,
         durationMinutes,
@@ -55,7 +71,7 @@ export default async function EditActivityPage({ params }: { params: { id: strin
         translations: {
           upsert: [
             {
-              where: { activityId_languageCode: { activityId: activity.id, languageCode: 'en' } },
+              where: { activityId_languageCode: { activityId: id, languageCode: 'en' } },
               update: {
                 title: enTitle,
                 shortDescription: enShort,
@@ -81,7 +97,7 @@ export default async function EditActivityPage({ params }: { params: { id: strin
               }
             },
             {
-              where: { activityId_languageCode: { activityId: activity.id, languageCode: 'tr' } },
+              where: { activityId_languageCode: { activityId: id, languageCode: 'tr' } },
               update: {
                 title: trTitle,
                 shortDescription: trShort,
@@ -115,7 +131,7 @@ export default async function EditActivityPage({ params }: { params: { id: strin
 
   async function remove() {
     'use server';
-    await prisma.activity.delete({ where: { id: activity.id } });
+    await prisma.activity.delete({ where: { id } });
     redirect('/admin/activities');
   }
 

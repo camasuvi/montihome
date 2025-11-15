@@ -1,5 +1,8 @@
+'use client';
 import { useTranslations } from 'next-intl';
 import { categories } from '@/lib/i18n';
+import { useRef } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function FilterBar({
   locale,
@@ -15,6 +18,8 @@ export default function FilterBar({
   };
 }) {
   const t = useTranslations('Activities');
+  const formRef = useRef<HTMLFormElement>(null);
+  const router = useRouter();
 
   function buildUrl(form: FormData) {
     const params = new URLSearchParams();
@@ -32,14 +37,21 @@ export default function FilterBar({
     return `/${locale}/activities${qs ? `?${qs}` : ''}`;
   }
 
+  function onFormChange() {
+    const formEl = formRef.current;
+    if (!formEl) return;
+    const url = buildUrl(new FormData(formEl));
+    router.push(url);
+  }
+
   return (
-    <form
-      action={(formData) => {
-        'use server';
-      }}
-      className="grid grid-cols-1 md:grid-cols-5 gap-3"
-    >
-      <select name="age" defaultValue={initial.age ?? ''} className="border rounded-md h-10 px-2">
+    <form ref={formRef} className="grid grid-cols-1 md:grid-cols-5 gap-3">
+      <select
+        name="age"
+        defaultValue={initial.age ?? ''}
+        className="border rounded-md h-10 px-2"
+        onChange={onFormChange}
+      >
         <option value="">{t('ageRange')}</option>
         <option value="AGE_0_6M">0–6m</option>
         <option value="AGE_6_12M">6–12m</option>
@@ -56,6 +68,7 @@ export default function FilterBar({
         name="category"
         defaultValue={initial.category ?? ''}
         className="border rounded-md h-10 px-2"
+        onChange={onFormChange}
       >
         <option value="">{t('category')}</option>
         {categories.map((c) => (
@@ -68,6 +81,7 @@ export default function FilterBar({
         name="duration"
         defaultValue={initial.duration ?? ''}
         className="border rounded-md h-10 px-2"
+        onChange={onFormChange}
       >
         <option value="">{t('duration')}</option>
         <option value="short">{t('durationShort')}</option>
@@ -78,6 +92,7 @@ export default function FilterBar({
         name="difficulty"
         defaultValue={initial.difficulty ?? ''}
         className="border rounded-md h-10 px-2"
+        onChange={onFormChange}
       >
         <option value="">{t('difficulty')}</option>
         <option value="EASY">{t('difficultyEasy')}</option>
@@ -88,13 +103,7 @@ export default function FilterBar({
         name="materials"
         defaultValue={initial.materials ?? ''}
         className="border rounded-md h-10 px-2"
-        onChange={(e) => {
-          if (typeof window !== 'undefined') {
-            const form = e.currentTarget.form!;
-            const url = buildUrl(new FormData(form));
-            window.location.href = url;
-          }
-        }}
+        onChange={onFormChange}
       >
         <option value="">{t('materialsLevel')}</option>
         <option value="HOUSEHOLD">{t('materialsHousehold')}</option>

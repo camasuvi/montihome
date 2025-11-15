@@ -10,7 +10,7 @@ export default createMiddleware({
 export const config = {
   // Skip next internals, static files, API, and admin routes
   matcher: [
-    '/((?!api|_next|_vercel|.*\\..*|admin(/.*)?).*)'
+    '/((?!api|_next|_vercel|.*\\..*|admin).*)'
   ]
 };
 
