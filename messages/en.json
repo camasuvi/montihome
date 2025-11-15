@@ -1,0 +1,125 @@
+{
+  "Nav": {
+    "activities": "Activities",
+    "guides": "Guides",
+    "myPlan": "My Plan",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "Landing": {
+    "heroTitle": "Montessori at Home, Made Simple",
+    "heroSubtitle": "Discover age-appropriate, Montessori-inspired activities and guides.",
+    "exploreActivities": "Explore activities",
+    "whatIsMontessoriTitle": "What is Montessori?",
+    "whatIsMontessoriText": "A child-centered approach fostering independence, order and concentration.",
+    "popularActivities": "Popular activities",
+    "guidesTeaser": "Explore our guides"
+  },
+  "Age": {
+    "0_6m": "0–6 months",
+    "6_12m": "6–12 months",
+    "12_18m": "12–18 months",
+    "18_24m": "18–24 months",
+    "24_36m": "2–3 years",
+    "3_4y": "3–4 years",
+    "4_5y": "4–5 years",
+    "5_6y": "5–6 years",
+    "6_7y": "6–7 years",
+    "7_9y": "7–9 years"
+  },
+  "Activities": {
+    "title": "Activities",
+    "filters": "Filters",
+    "ageRange": "Age range",
+    "category": "Category",
+    "duration": "Duration",
+    "difficulty": "Difficulty",
+    "materialsLevel": "Materials",
+    "durationShort": "Short (≤10m)",
+    "durationMedium": "Medium (10–20m)",
+    "durationLong": "Long (20m+)",
+    "difficultyEasy": "Easy",
+    "difficultyMedium": "Medium",
+    "difficultyHard": "Hard",
+    "materialsHousehold": "Only household items",
+    "materialsSimple": "Simple supplies",
+    "materialsMontessori": "Montessori materials",
+    "apply": "Apply",
+    "reset": "Reset",
+    "viewDetails": "View details",
+    "addToPlan": "Add to my plan",
+    "noResults": "No activities found."
+  },
+  "Activity": {
+    "goal": "Goal",
+    "materials": "Materials",
+    "steps": "Steps",
+    "tips": "Tips",
+    "variations": "Variations",
+    "safety": "Safety notes",
+    "duration": "Duration",
+    "minutes": "min",
+    "difficulty": "Difficulty",
+    "category": "Category",
+    "age": "Age"
+  },
+  "Guides": {
+    "title": "Guides",
+    "montessori101": "Montessori 101",
+    "ageGuides": "Age Guides",
+    "preparedEnvironment": "Prepared Environment",
+    "parenting": "Parenting & Mindset",
+    "faq": "FAQs",
+    "readMore": "Read more",
+    "noGuides": "No guides available."
+  },
+  "MyPlan": {
+    "title": "My Plan",
+    "empty": "Your plan is empty.",
+    "remove": "Remove",
+    "assignDay": "Assign day",
+    "clearAll": "Clear all"
+  },
+  "Common": {
+    "comingSoon": "Private / Coming soon",
+    "publicMode": "Public mode",
+    "on": "On",
+    "off": "Off",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "create": "Create",
+    "update": "Update",
+    "cancel": "Cancel",
+    "language": "Language"
+  },
+  "Admin": {
+    "title": "Admin",
+    "loginTitle": "Admin Login",
+    "password": "Password",
+    "signIn": "Sign in",
+    "activities": "Activities",
+    "guides": "Guides",
+    "settings": "Settings",
+    "createActivity": "Create Activity",
+    "createGuide": "Create Guide"
+  },
+  "Categories": {
+    "Practical Life": "Practical Life",
+    "Sensorial": "Sensorial",
+    "Language": "Language",
+    "Math": "Math",
+    "Culture & Science": "Culture & Science",
+    "Art & Creativity": "Art & Creativity",
+    "Movement / Gross Motor": "Movement / Gross Motor"
+  },
+  "Tags": {
+    "Fine Motor": "Fine Motor",
+    "Concentration": "Concentration",
+    "Independence": "Independence",
+    "Order": "Order",
+    "Social Skills": "Social Skills"
+  }
+}
+
+

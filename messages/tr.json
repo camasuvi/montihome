@@ -1,0 +1,125 @@
+{
+  "Nav": {
+    "activities": "Etkinlikler",
+    "guides": "Rehberler",
+    "myPlan": "Planım",
+    "about": "Hakkında",
+    "contact": "İletişim"
+  },
+  "Landing": {
+    "heroTitle": "Evde Montessori, Kolaylaştırıldı",
+    "heroSubtitle": "Yaşa uygun, Montessori esintili etkinlik ve rehberleri keşfedin.",
+    "exploreActivities": "Etkinlikleri keşfet",
+    "whatIsMontessoriTitle": "Montessori nedir?",
+    "whatIsMontessoriText": "Bağımsızlık, düzen ve konsantrasyona odaklanan çocuk merkezli bir yaklaşım.",
+    "popularActivities": "Popüler etkinlikler",
+    "guidesTeaser": "Rehberlerimizi keşfedin"
+  },
+  "Age": {
+    "0_6m": "0–6 ay",
+    "6_12m": "6–12 ay",
+    "12_18m": "12–18 ay",
+    "18_24m": "18–24 ay",
+    "24_36m": "2–3 yaş",
+    "3_4y": "3–4 yaş",
+    "4_5y": "4–5 yaş",
+    "5_6y": "5–6 yaş",
+    "6_7y": "6–7 yaş",
+    "7_9y": "7–9 yaş"
+  },
+  "Activities": {
+    "title": "Etkinlikler",
+    "filters": "Filtreler",
+    "ageRange": "Yaş aralığı",
+    "category": "Kategori",
+    "duration": "Süre",
+    "difficulty": "Zorluk",
+    "materialsLevel": "Malzemeler",
+    "durationShort": "Kısa (≤10dk)",
+    "durationMedium": "Orta (10–20dk)",
+    "durationLong": "Uzun (20dk+)",
+    "difficultyEasy": "Kolay",
+    "difficultyMedium": "Orta",
+    "difficultyHard": "Zor",
+    "materialsHousehold": "Sadece ev eşyaları",
+    "materialsSimple": "Basit malzemeler",
+    "materialsMontessori": "Montessori materyalleri",
+    "apply": "Uygula",
+    "reset": "Sıfırla",
+    "viewDetails": "Detayları gör",
+    "addToPlan": "Planıma ekle",
+    "noResults": "Etkinlik bulunamadı."
+  },
+  "Activity": {
+    "goal": "Amaç",
+    "materials": "Malzemeler",
+    "steps": "Adımlar",
+    "tips": "İpuçları",
+    "variations": "Varyasyonlar",
+    "safety": "Güvenlik notları",
+    "duration": "Süre",
+    "minutes": "dk",
+    "difficulty": "Zorluk",
+    "category": "Kategori",
+    "age": "Yaş"
+  },
+  "Guides": {
+    "title": "Rehberler",
+    "montessori101": "Montessori 101",
+    "ageGuides": "Yaş Rehberleri",
+    "preparedEnvironment": "Hazırlanmış Ortam",
+    "parenting": "Ebeveynlik ve Zihniyet",
+    "faq": "SSS",
+    "readMore": "Devamını oku",
+    "noGuides": "Rehber bulunmuyor."
+  },
+  "MyPlan": {
+    "title": "Planım",
+    "empty": "Planınız boş.",
+    "remove": "Kaldır",
+    "assignDay": "Gün ata",
+    "clearAll": "Tümünü temizle"
+  },
+  "Common": {
+    "comingSoon": "Gizli / Çok yakında",
+    "publicMode": "Genel mod",
+    "on": "Açık",
+    "off": "Kapalı",
+    "save": "Kaydet",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "create": "Oluştur",
+    "update": "Güncelle",
+    "cancel": "İptal",
+    "language": "Dil"
+  },
+  "Admin": {
+    "title": "Yönetim",
+    "loginTitle": "Yönetici Girişi",
+    "password": "Parola",
+    "signIn": "Giriş yap",
+    "activities": "Etkinlikler",
+    "guides": "Rehberler",
+    "settings": "Ayarlar",
+    "createActivity": "Etkinlik Oluştur",
+    "createGuide": "Rehber Oluştur"
+  },
+  "Categories": {
+    "Practical Life": "Günlük Yaşam",
+    "Sensorial": "Duyusal",
+    "Language": "Dil",
+    "Math": "Matematik",
+    "Culture & Science": "Kültür ve Bilim",
+    "Art & Creativity": "Sanat ve Yaratıcılık",
+    "Movement / Gross Motor": "Hareket / Kaba Motor"
+  },
+  "Tags": {
+    "Fine Motor": "İnce Motor",
+    "Concentration": "Konsantrasyon",
+    "Independence": "Bağımsızlık",
+    "Order": "Düzen",
+    "Social Skills": "Sosyal Beceriler"
+  }
+}
+
+

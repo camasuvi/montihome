@@ -1,0 +1,104 @@
+// Prisma schema for MontiHome
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AgeRange {
+  AGE_0_6M
+  AGE_6_12M
+  AGE_12_18M
+  AGE_18_24M
+  AGE_24_36M
+  AGE_3_4Y
+  AGE_4_5Y
+  AGE_5_6Y
+  AGE_6_7Y
+  AGE_7_9Y
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum MaterialsLevel {
+  HOUSEHOLD
+  SIMPLE_SUPPLIES
+  MONTESSORI
+}
+
+model Activity {
+  id               Int              @id @default(autoincrement())
+  ageRange         AgeRange
+  durationMinutes  Int
+  difficulty       Difficulty
+  primaryCategory  String
+  categories       String[]         @default([])
+  tags             String[]         @default([])
+  materialsLevel   MaterialsLevel?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  translations     ActivityTranslation[]
+}
+
+model ActivityTranslation {
+  id               Int       @id @default(autoincrement())
+  activityId       Int
+  languageCode     String
+  title            String
+  shortDescription String?
+  description      String?
+  materials        Json?
+  steps            Json?
+  goal             String?
+  tips             Json?
+  variations       Json?
+  safetyNotes      String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  activity Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+
+  @@unique([activityId, languageCode])
+}
+
+model Guide {
+  id         Int                 @id @default(autoincrement())
+  slug       String              @unique
+  category   String
+  published  Boolean             @default(false)
+  createdAt  DateTime            @default(now())
+  updatedAt  DateTime            @updatedAt
+  translations GuideTranslation[]
+}
+
+model GuideTranslation {
+  id           Int      @id @default(autoincrement())
+  guideId      Int
+  languageCode String
+  title        String
+  summary      String
+  content      String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  guide Guide @relation(fields: [guideId], references: [id], onDelete: Cascade)
+
+  @@unique([guideId, languageCode])
+}
+
+model SiteSettings {
+  id        Int      @id @default(1)
+  isPublic  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
