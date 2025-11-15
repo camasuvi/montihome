@@ -5,6 +5,8 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { isSupportedLocale, Locale } from '@/lib/i18n';
 
+export const dynamic = 'force-dynamic';
+
 export default async function LocaleLayout({
   params,
   children
@@ -19,8 +21,14 @@ export default async function LocaleLayout({
       : (await import('@/messages/en.json')).default;
 
   // Site visibility check
-  const settings = await prisma.siteSettings.findUnique({ where: { id: 1 } });
-  const isPublic = settings?.isPublic ?? false;
+  let isPublic = false;
+  try {
+    const settings = await prisma.siteSettings.findUnique({ where: { id: 1 } });
+    isPublic = settings?.isPublic ?? false;
+  } catch {
+    // If DB is unreachable, avoid crashing the app and show Private page.
+    isPublic = false;
+  }
 
   if (!isPublic) {
     return (
